@@ -8,5 +8,5 @@ class User(AbstractUser):
     website_link=models.URLField(null=True)
     work_experience=models.IntegerField(default=0)
     stud_name=models.CharField(max_length=100)
-    usertype=models.CharField(choices=[('user','user'),('admin','admin'),('teacher','teacher'),('organisation','organisation')])
+    usertype=models.CharField(max_length=20,default="admin")
 

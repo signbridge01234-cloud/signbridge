@@ -1,0 +1,29 @@
+<h1>Registered students</h1>
+<table border="1">
+    <tr>
+        <th>SI.No</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Stud name</th>
+        <th>Phone_no</th>
+        <th>Address</th>
+        <th>Location</th>
+        <th>Website link</th>
+        <th>Work experience</th>
+    </tr>
+    <tr>
+    {% if students %}
+    {% for student in students %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{student.username}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.address}}</td>
+            <td>{{student.phone_no}}</td>
+            <td>{{student.location}}</td>
+            <td>{{student.work_experience}}</td>
+            <td>{{student.website_link}}</td>
+        </tr>
+        {% endfor %} {% endif %}
+    </tr>
+</table>
