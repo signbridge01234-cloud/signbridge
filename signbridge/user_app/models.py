@@ -1,0 +1,12 @@
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+# Create your models here.
+class User(AbstractUser):
+    phone_no=models.IntegerField(default=0)
+    address=models.CharField(max_length=100)
+    location=models.CharField(max_length=100)
+    website_link=models.URLField(null=True)
+    work_experience=models.IntegerField(default=0)
+    stud_name=models.CharField(max_length=100)
+    usertype=models.CharField(choices=[('user','user'),('admin','admin'),('teacher','teacher'),('organisation','organisation')])
+
