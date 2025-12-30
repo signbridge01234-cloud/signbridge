@@ -8,5 +8,7 @@ class User(AbstractUser):
     website_link=models.URLField(null=True)
     work_experience=models.IntegerField(default=0)
     stud_name=models.CharField(max_length=100)
+    org_name=models.CharField(max_length=100,null=True,blank=True)
+    org_type=models.CharField(max_length=100,null=True,blank=True)
     usertype=models.CharField(max_length=20,default="admin")
 

@@ -1,0 +1,12 @@
+<h1> My profile</h1>
+<h2>Username: {{user.username}}</h2>
+<h3>Email: {{user.email}}</h3>
+<h3>Name: {{user.stud_name}}</h3>
+<h3>Phone no: {{user.phone_no}}</h3>
+<h3>Address: {{user.address}}</h3>
+<h3>Location: {{user.location}}</h3>
+<h3>Website: {{user.website_link}}</h3>
+<h3>Work Experinece: {{user.work_experience}} years</h3>
+<h3>Last Login: {{user.last_login}}</h3>
+<h3>Date Joined: {{user.date_joined}}</h3>
+<button><a href="{% url 'edit_profile' %}">Edit profile</a></button>

@@ -9,13 +9,21 @@
 <body>
     <h1>Login page</h1>
     <button><a href="/">index</a></button>
+    {% if messages %}
+    {% for message in messages %}
+    <div>
+        {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
     <form method="post">
         {% csrf_token %}
         <label>Username</label>
         <input type="text" name="username"><br>
         <label>Password</label>
         <input type="password" name="password"><br>
-         <input type="Submit" value="login">
+        <input type="Submit" value="login">
     </form>
 </body>
 </html>

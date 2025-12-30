@@ -10,6 +10,7 @@
         <th>Location</th>
         <th>Website link</th>
         <th>Work experience</th>
+        <th>action</th>
     </tr>
     <tr>
     {% if students %}
@@ -23,7 +24,14 @@
             <td>{{student.location}}</td>
             <td>{{student.work_experience}}</td>
             <td>{{student.website_link}}</td>
+            <td>
+                {% if student.is_activate %}
+                <button><a href="{% url 'deactivate_user' student.id %}">Deactivate User</a></button>
+                {% else %}
+                <button><a href="{% url 'activate_user' student.id %}">Activate User</a></button>
+                {% endif %}
+            </td>
         </tr>
-        {% endfor %} {% endif %}
+    {% endfor %} {% endif %}
     </tr>
 </table>

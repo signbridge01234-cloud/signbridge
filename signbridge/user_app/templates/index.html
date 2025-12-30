@@ -6,15 +6,18 @@
     <title>Document</title>
 </head>
 <body> 
-    helloooo
+    helloooo.......
     {% if not request.user.is_authenticated %}
-    <button><a href="/register">Register</a></button>
+    <button><a href="/register">Register as Student</a></button>
+    <button><a href="/orgRegister">Register as Organization</a></button>
     <button><a href="/login">Login</a></button>
     {% else %}
     {% if request.user.is_superuser %}
     <button><a href="/view_students">View students</a></button>
+    {% else %}
+    <button><a href="/profile">Profile</a></button>
     {% endif %}
     <button><a href="/logout">Logout</a></button>
-    {% endif %}
+     {% endif %}
 </body>
 </html>
