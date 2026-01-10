@@ -2,6 +2,11 @@ from django.shortcuts import render,redirect
 from .models import *
 from django. contrib import messages 
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import update_session_auth_hash
+import random
+import string
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -107,3 +112,48 @@ def edit_profile(request):
     else:
         user=request.user
     return render(request,'edit.html',{'user':user})   
+
+def change_password(request):
+    user = request.user
+    if request.method == 'POST':
+        current.password = request.POST.get("current_password")
+        new_password = request.POST.get("new_password")
+        if not user.check_password(current_password):
+            messages.error(request, 'current password incorrect')
+            return redirect('change_password')
+        else:
+            user.set_password(new_password)
+            user.save()
+
+            update_session_auth_hash(request , user)
+            messages.success(request, 'password change success')
+            return redirect('profile')
+
+    return render(request , 'change_password.html')
+
+def forgot_password(request):
+    if request.method == 'post':
+        email = request.POST.get('email')
+        user = User.objects.get(email=email)
+        if not user:
+            messages.error(request,'No accoutnt found for this email')
+            return redirect('forgot_password')
+
+        temp_password = generate_random_password()
+        user.set_Password(temp_password)
+        user.save()
+        Send_mail(Subject = "your one time password",
+            message = f'''
+                Hello {user.username}
+                Your new temporary passwoord is : {temp_password}''',
+            from_email = settings.EMAIL_HOST_USER,
+            recipeint_list = [email],
+            fail_silently  = False,
+            )
+        messages.success(request, "temporary password send to your email")
+        return redirect('login')
+    return render(request ,'forgot_password.html')
+
+def generate_random_password(length = 8):
+    character = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range (length)) 
